@@ -30,8 +30,12 @@ float:left;
 
 }
 
-#editor {
-  float:left;
+.edit {
+  display:none;
+}
+
+.editing .edit {
+  display:inherit;
 }
 
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}

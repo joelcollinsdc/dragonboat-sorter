@@ -1,10 +1,5 @@
 $(function () {
   var Person = Backbone.Model.extend({
-    defaults: function() {
-      return {
-        name: "Empty..."
-      }; 
-    }
   });
 
   var PeopleList = Backbone.Collection.extend({
@@ -12,28 +7,47 @@ $(function () {
   });
 
   var People = new PeopleList;
-/*  AvailablePeople.add[
-    {name: "Joel"}
-  ]
-*/
 
   var PersonView = Backbone.View.extend({
     tagName: "li",
     template: _.template($('#person-template').html()),
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
+      this.input = this.$('input');
       return this;
     },
     events: {
       "click a.destroy" : "clear",
+      "dblclick"  : "edit",
+      "click a.update" : "update",
+      "keypress .edit"  : "updateOnEnter",
+    },
+    initialize: function() {
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'destroy', this.remove);
     },
     clear: function() {
       this.model.destroy();
     },
-    initialize: function() {
-      //this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'destroy', this.remove);
+    edit: function() {
+      this.$el.addClass("editing");
+      this.input.focus();
     },
+    update: function() {
+      var value = this.input.val();
+      if (value) {
+        this.model.set({name: value});
+      }
+      else {
+        this.clear();
+      }
+      this.$el.removeClass("editing");
+    },
+    // If you hit `enter`, we're through editing the item.
+    updateOnEnter: function(e) {
+      if (e.keyCode == 13) this.update();
+    },
+
   });
 
   PeopleApp = Backbone.View.extend({

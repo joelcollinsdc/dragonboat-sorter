@@ -10,9 +10,13 @@
     <!-- templates -->
     <script type="text/template" id="person-template">
       <div class="person">
-        Person: 
+        <div class="view">
           <%- name %>
         <a class="destroy">X</a>
+        </div>
+        <div class="edit">
+          <input type="text" value="<%- name %>" />
+        </div>
       </div>
     </script>
 
@@ -25,7 +29,8 @@
       <h2>Available People:</h2>
       <ul id="peopleList">
       </ul>
-      <input id="newPerson" type="text" placeholder="Name:">
+      <label for="newPerson">Add:</label>
+      <input name="newPerson" id="newPerson" type="text" placeholder="Name:">
     </div>
 
 
