@@ -22,6 +22,8 @@ float:left;
   border: 2px solid green;
 }
 
+.destroy { color: blue; cursor: pointer; }
+
 #drummer, #steerer { 
   background-color: blue;
   height: 40px;

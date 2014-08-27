@@ -7,18 +7,76 @@ $(function () {
     }
   });
 
-  var Available = Backbone.Collection.extend({
+  var PeopleList = Backbone.Collection.extend({
     model: Person
-  })
+  });
+
+  var People = new PeopleList;
+/*  AvailablePeople.add[
+    {name: "Joel"}
+  ]
+*/
 
   var PersonView = Backbone.View.extend({
-    tagName: "div",
+    tagName: "li",
     template: _.template($('#person-template').html()),
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
-    }
+      return this;
+    },
+    events: {
+      "click a.destroy" : "clear",
+    },
+    clear: function() {
+      this.model.destroy();
+    },
+    initialize: function() {
+      //this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'destroy', this.remove);
+    },
   });
 
+  PeopleApp = Backbone.View.extend({
+    el: $("#peopleApp"),
+
+    events: {
+      "keypress #newPerson":  "createOnEnter"
+    },
+
+    initialize: function() {
+      this.input = this.$("#newPerson");
+
+      this.listenTo(People, 'add', this.addPerson);
+      this.listenTo(People, 'remove', this.removePerson);
+    },
+
+    // If you hit return in the main input field, create new **Todo** model,
+    // persisting it to *localStorage*.
+    createOnEnter: function(e) {
+      
+      if (e.keyCode != 13) return;
+      if (!this.input.val()) return;
+
+      People.add({name: this.input.val()});
+      this.input.val('');
+    },
+
+    addPerson: function(person) {
+      console.log("in addperson");
+      var view = new PersonView({model: person});
+      this.$("#peopleList").append(view.render().el);
+    },
+
+    removePerson: function(person) {
+      console.log("in removeperson");
+    },
+  });
+  var peopleApp = new PeopleApp;
+  window.app = peopleApp;
+  window.people = People;
+
+
+/*
   var Seat = Backbone.Model.extend({
     defaults: function() {
       return {
@@ -26,6 +84,7 @@ $(function () {
       };
     }
   });
+*/
 
   $(".row>div, #drummer, #steerer").click(function() {
     $(".row>div, #drummer, #steerer").removeClass("selected");
