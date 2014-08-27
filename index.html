@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <title>Dragonboat sorting app</title>  
+    <link type="text/css" href="dragonboat.css" rel="stylesheet" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="underscore.js"></script>
+    <script type="text/javascript" src="backbone.js"></script>
+    <script type="text/javascript" src="dragonboat.js"></script>
+
+    <script type="text/template" id="person-template">
+      <%- name %>
+    </script>
+
+  </head>
+  <body>
+    <h1>Dragonboat Sorter</h1>
+    <div class="boat">
+      <div id="drummer"></div>
+      <div class="row">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+      </div>
+      <div id="steerer"></div>
+    </div>
+
+    <div class="available">
+      No People Available
+    </div>
+
+    <div id="editor">
+      <h2>Editor:</h2>
+      <form>
+         <label for="name">Name</label>
+         <input name="name" id="name" type="text"  />
+         <br />
+         <label for="weight">Weight</label>
+         <input name="weight" id="weight" type="text"  />
+         <br />
+         <input id="submit" type="button" value="Update" />
+      </form>
+    </div>
+
+    <div id="weights">
+      <label for="totalweight">Total Weight</label>
+      <input type="text" disabled="disabled" id="totalweight" />
+
+      <label for="leftweight">Left Weight</label>
+      <input type="text" disabled="disabled" id="leftweight" />
+
+      <label for="rightweight">Right Weight</label>
+      <input type="text" disabled="disabled" id="rightweight" />
+    </div>
+
+  </body>
+</html>

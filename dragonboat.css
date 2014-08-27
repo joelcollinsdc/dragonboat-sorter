@@ -1,0 +1,36 @@
+.boat {
+float:left;
+ width:200px;
+ background-color: red
+}
+
+.row { border: 1px solid black;}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.row div {
+  width:50%;
+  float:left;
+  box-sizing: border-box; ;
+  height: 50px; 
+  border: 1px solid grey; 
+}
+
+.selected {
+  border: 2px solid green;
+}
+
+#drummer, #steerer { 
+  background-color: blue;
+  height: 40px;
+
+}
+
+#editor {
+  float:left;
+}
+
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+* html .clearfix{height:1%;}*:first-child + html .clearfix{min-height:1%;}
