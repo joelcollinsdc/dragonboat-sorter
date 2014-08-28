@@ -1,9 +1,13 @@
 $(function () {
   var Person = Backbone.Model.extend({
+
   });
 
   var PeopleList = Backbone.Collection.extend({
-    model: Person
+    model: Person,
+    comparator: function(person) {
+      return person.get('name').toLowerCase();
+    }
   });
 
   var People = new PeopleList;
@@ -13,7 +17,7 @@ $(function () {
     template: _.template($('#person-template').html()),
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
-      this.input = this.$('input');
+      this.input = this.$('input.name'); //why is this here?
       return this;
     },
     events: {
@@ -34,9 +38,14 @@ $(function () {
       this.input.focus();
     },
     update: function() {
-      var value = this.input.val();
-      if (value) {
-        this.model.set({name: value});
+      var name = this.input.val(),
+        weight = this.$('.weight').val();
+
+      if (name) {
+        this.model.set({
+          name: name, 
+          weight: weight
+        });
       }
       else {
         this.clear();
@@ -52,13 +61,14 @@ $(function () {
 
   PeopleApp = Backbone.View.extend({
     el: $("#peopleApp"),
-
+    
     events: {
-      "keypress #newPerson":  "createOnEnter"
+      "keypress #newPerson, #weight":  "createOnEnter"
     },
 
     initialize: function() {
       this.input = this.$("#newPerson");
+      this.weight = this.$("#weight");
 
       this.listenTo(People, 'add', this.addPerson);
       this.listenTo(People, 'remove', this.removePerson);
@@ -71,14 +81,36 @@ $(function () {
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
 
-      People.add({name: this.input.val()});
+      People.add({
+        name: this.input.val(),
+        weight: this.weight.val(),
+      });
+
       this.input.val('');
+      this.weight.val('');
+    },
+
+    render: function() {
+      console.log("in render");
+      this.$("#peopleList").empty();
+      people.each(function (person) {
+        //console.log(person);
+        var view = new PersonView({model: person});
+        this.$("#peopleList").append(view.render().el);
+      });
+      return this;
     },
 
     addPerson: function(person) {
       console.log("in addperson");
-      var view = new PersonView({model: person});
-      this.$("#peopleList").append(view.render().el);
+
+      this.render();
+      //var view = new PersonView({model: person});
+      //this.$("#peopleList").append(view.render().el);
+    },
+
+    addAll: function() {
+      People.each(this.addOne, this);
     },
 
     removePerson: function(person) {

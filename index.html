@@ -11,11 +11,13 @@
     <script type="text/template" id="person-template">
       <div class="person">
         <div class="view">
-          <%- name %>
+          <%- name %> : <%- weight %>
         <a class="destroy">X</a>
         </div>
         <div class="edit">
-          <input type="text" value="<%- name %>" />
+          <input class="name" type="text" value="<%- name %>" placeholder="Name" />
+          <input class="weight" type="text" value="<%- weight %>" placeholder="Weight" />
+          <a class="update">Update</a>
         </div>
       </div>
     </script>
@@ -30,7 +32,10 @@
       <ul id="peopleList">
       </ul>
       <label for="newPerson">Add:</label>
-      <input name="newPerson" id="newPerson" type="text" placeholder="Name:">
+      <input name="newPerson" id="newPerson" type="text" placeholder="Name:" />
+      <label for="weight">Weight:</label>
+      <input name="weight" id="weight" type="text" placeholder="Weight:" />
+      
     </div>
 
 

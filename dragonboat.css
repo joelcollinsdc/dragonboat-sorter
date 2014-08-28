@@ -22,7 +22,7 @@ float:left;
   border: 2px solid green;
 }
 
-.destroy { color: blue; cursor: pointer; }
+.destroy, .update { color: blue; cursor: pointer; }
 
 #drummer, #steerer { 
   background-color: blue;
