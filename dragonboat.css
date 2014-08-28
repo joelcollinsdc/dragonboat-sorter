@@ -1,4 +1,4 @@
-.boat {
+#boat {
 float:left;
  width:200px;
  background-color: red
@@ -37,6 +37,3 @@ float:left;
 .editing .edit {
   display:inherit;
 }
-
-.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
-* html .clearfix{height:1%;}*:first-child + html .clearfix{min-height:1%;}

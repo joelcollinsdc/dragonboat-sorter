@@ -2,17 +2,17 @@
   <head>
     <title>Dragonboat sorting app</title>  
     <link type="text/css" href="dragonboat.css" rel="stylesheet" />
-    <script type="text/javascript" src="jquery.js"></script>
-    <script type="text/javascript" src="underscore.js"></script>
-    <script type="text/javascript" src="backbone.js"></script>
+    <script type="text/javascript" src="assets/jquery.js"></script>
+    <script type="text/javascript" src="assets/underscore.js"></script>
+    <script type="text/javascript" src="assets/backbone.js"></script>
     <script type="text/javascript" src="dragonboat.js"></script>
 
     <!-- templates -->
     <script type="text/template" id="person-template">
       <div class="person">
         <div class="view">
-          <%- name %> : <%- weight %>
-        <a class="destroy">X</a>
+            <%- name %> : <%- weight %>
+          <a class="destroy">X</a>
         </div>
         <div class="edit">
           <input class="name" type="text" value="<%- name %>" placeholder="Name" />
@@ -20,6 +20,10 @@
           <a class="update">Update</a>
         </div>
       </div>
+    </script>
+
+    <script type="text/template" id="seat-template">
+        <%- row %> <%- side %>
     </script>
 
   </head>
@@ -35,12 +39,11 @@
       <input name="newPerson" id="newPerson" type="text" placeholder="Name:" />
       <label for="weight">Weight:</label>
       <input name="weight" id="weight" type="text" placeholder="Weight:" />
-      
     </div>
 
 
 
-    <div class="boat">
+    <div id="boat">
       <div id="drummer"></div>
       <div class="row">
         <div></div>

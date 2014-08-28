@@ -1,6 +1,5 @@
 $(function () {
   var Person = Backbone.Model.extend({
-
   });
 
   var PeopleList = Backbone.Collection.extend({
@@ -54,7 +53,6 @@ $(function () {
     updateOnEnter: function(e) {
       if (e.keyCode == 13) this.update();
     },
-
   });
 
   PeopleView = Backbone.View.extend({
@@ -75,7 +73,7 @@ $(function () {
     // If you hit return in the main input field, create new **Todo** model,
     // persisting it to *localStorage*.
     createOnEnter: function(e) {
-      
+      console.log("wtf");
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
 
@@ -121,15 +119,61 @@ $(function () {
   window.people = people;
 
 
-/*
   var Seat = Backbone.Model.extend({
-    defaults: function() {
-      return {
-        row: 0
-      };
-    }
   });
-*/
+
+  window.Seat = Seat;
+  
+  var SeatView = Backbone.View.extend({
+    tagName: "div",
+    template: _.template($('#seat-template').html()),
+    render: function() {
+      return this.$el.html(this.template(this.model.toJSON()));
+    },
+  });
+
+  window.SeatView = SeatView;
+ 
+  var SeatCollection = Backbone.Collection.extend({
+    model: Seat,
+  });
+
+  boat = new SeatCollection();
+
+  for (var i=1;i<=10;i++) {
+    boat.add({ row: i, side: "left"});
+    boat.add({ row: i, side: "right"});
+  }
+
+  window.boat = boat;
+
+  var BoatView = Backbone.View.extend({
+    el: $("#boat"),
+
+    render: function() {
+      boat.each(function (seat) {
+        var row = this.$("#boat").find(".row").eq(seat.get("row") -1);
+        var seatEl;
+        if (seat.get("side") == "left") {
+          seatEl = row.find("div").eq(0);
+        }
+        else {
+          seatEl = row.find("div").eq(1);
+        }
+        
+        var sv = new SeatView({model: seat, el: seatEl});
+
+        sv.render();
+      });
+    },
+
+  });
+
+  boatView = new BoatView;
+  boatView.render();
+
+/*
+
 
   $(".row>div, #drummer, #steerer").click(function() {
     $(".row>div, #drummer, #steerer").removeClass("selected");
@@ -166,4 +210,5 @@ $(function () {
     }
     $("#totalweight").val(totalWeight);
   }
+  */
 });
