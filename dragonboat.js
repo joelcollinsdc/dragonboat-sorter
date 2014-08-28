@@ -10,8 +10,6 @@ $(function () {
     }
   });
 
-  var People = new PeopleList;
-
   var PersonView = Backbone.View.extend({
     tagName: "li",
     template: _.template($('#person-template').html()),
@@ -59,7 +57,7 @@ $(function () {
 
   });
 
-  PeopleApp = Backbone.View.extend({
+  PeopleView = Backbone.View.extend({
     el: $("#peopleApp"),
     
     events: {
@@ -70,8 +68,8 @@ $(function () {
       this.input = this.$("#newPerson");
       this.weight = this.$("#weight");
 
-      this.listenTo(People, 'add', this.addPerson);
-      this.listenTo(People, 'remove', this.removePerson);
+      this.listenTo(people, 'add', this.addPerson);
+      this.listenTo(people, 'remove', this.removePerson);
     },
 
     // If you hit return in the main input field, create new **Todo** model,
@@ -81,7 +79,7 @@ $(function () {
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
 
-      People.add({
+      people.add({
         name: this.input.val(),
         weight: this.weight.val(),
       });
@@ -110,16 +108,17 @@ $(function () {
     },
 
     addAll: function() {
-      People.each(this.addOne, this);
+      people.each(this.addOne, this);
     },
 
     removePerson: function(person) {
       console.log("in removeperson");
     },
   });
-  var peopleApp = new PeopleApp;
-  window.app = peopleApp;
-  window.people = People;
+
+  var people = new PeopleList;
+  window.peopleView = new PeopleView;
+  window.people = people;
 
 
 /*
