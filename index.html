@@ -2,29 +2,7 @@
   <head>
     <title>Dragonboat sorting app</title>  
     <link type="text/css" href="dragonboat.css" rel="stylesheet" />
-    <script type="text/javascript" src="assets/jquery.js"></script>
-    <script type="text/javascript" src="assets/underscore.js"></script>
-    <script type="text/javascript" src="assets/backbone.js"></script>
-    <script type="text/javascript" src="dragonboat.js"></script>
 
-    <!-- templates -->
-    <script type="text/template" id="person-template">
-      <div class="person">
-        <div class="view">
-            <%- name %> : <%- weight %>
-          <a class="destroy">X</a>
-        </div>
-        <div class="edit">
-          <input class="name" type="text" value="<%- name %>" placeholder="Name" />
-          <input class="weight" type="text" value="<%- weight %>" placeholder="Weight" />
-          <a class="update">Update</a>
-        </div>
-      </div>
-    </script>
-
-    <script type="text/template" id="seat-template">
-        <%- row %> <%- side %>
-    </script>
 
   </head>
   <body>
@@ -35,10 +13,19 @@
       <h2>Available People:</h2>
       <ul id="peopleList">
       </ul>
-      <label for="newPerson">Add:</label>
-      <input name="newPerson" id="newPerson" type="text" placeholder="Name:" />
-      <label for="weight">Weight:</label>
-      <input name="weight" id="weight" type="text" placeholder="Weight:" />
+      <fieldset>
+        <legend>Add new person</legend>
+        <label for="newPerson">Add:</label>
+        <input name="new_person" id="new_person" type="text" placeholder="Name:" />
+        <label for="weight">Weight:</label>
+        <input name="new_weight" id="new_weight" type="text" placeholder="Weight:" />
+        <label for="side">Side Preference:</label>
+        <select name="new_side_pref" id="new_side_pref">
+          <option>Left</option>
+          <option selected>Both</option>
+          <option>Right</option>
+        </select>
+      </fieldset>
     </div>
 
 
@@ -110,6 +97,79 @@
       <label for="rightweight">Right Weight</label>
       <input type="text" disabled="disabled" id="rightweight" />
     </div>
+
+
+    <script src="assets/jquery.js"></script>
+   
+
+    <script type="text/javascript" src="assets/underscore.js"></script>
+    <script type="text/javascript" src="assets/backbone.js"></script>
+
+    <script>
+      function bindperson() {
+        $('.person').bind('dragstart', function(e) {
+          console.log('dragstart');
+          console.log($(this).html());
+          var f = e.originalEvent;
+          f.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
+          f.dataTransfer.setData('Text', $(this).find(".name").val()); // required otherwise doesn't work
+        });
+      }
+      $('.row>div').bind('dragover', function (e) {
+        if (e.preventDefault) e.preventDefault(); // allows us to drop
+        $(this).addClass('over');
+        //e.dataTransfer.dropEffect = 'copy';
+        return false;
+      })
+      .bind('dragleave', function (e) {
+        if (e.preventDefault) e.preventDefault(); // allows us to drop
+        $(this).removeClass('over');
+       
+        return false;
+      })
+      .bind('drop', function (e) {
+        console.log(e);
+        console.log(e.originalEvent.dataTransfer)
+        console.log(e.originalEvent.dataTransfer.getData('Text'));
+        $(this).html(e.originalEvent.dataTransfer.getData('Text'));
+        $(this).removeClass('over');
+      });
+    </script>
+
+    <!-- templates -->
+    <script type="text/template" id="person-template">
+      <div class="person" draggable="true">
+        <div class="view">
+            <%- name %> : <%- weight %> : <%- side_pref %>
+          <a class="destroy">X</a>
+        </div>
+        <div class="edit">
+          <input class="name" type="text" value="<%- name %>" placeholder="Name" />
+          <input class="weight" type="text" value="<%- weight %>" placeholder="Weight" />
+          <select class="side_pref">
+            <option>Left</option>
+            <option>Both</option>
+            <option>Right</option>
+          </select>
+          <a class="update">Update</a>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/template" id="seat-template">
+        <%- row %> <%- side %>
+    </script>
+
+    <script type="text/javascript" src="js/models/person.js"></script>
+    <script type="text/javascript" src="js/models/seat.js"></script>
+    <script type="text/javascript" src="js/collections/people.js"></script>
+    <script type="text/javascript" src="js/collections/boat.js"></script>
+    <script type="text/javascript" src="js/views/person-view.js"></script>
+    <script type="text/javascript" src="js/views/people-view.js"></script>
+    <script type="text/javascript" src="js/views/seat-view.js"></script>
+    <script type="text/javascript" src="js/views/boat-view.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
 
   </body>
 </html>
