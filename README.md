@@ -13,4 +13,4 @@ Phase 1 - boat balancing
   *  calculate total weight... hull speed(?)
   *  need to enter boat type?  
 * shareable.  savable?
-
+  * firebase?
