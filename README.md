@@ -1,5 +1,7 @@
 Dragonboat sorter app
 
+The purpose of this app is to provide dragonboat teams with the ability to create seating arrangements based on paddler preferences, weights, and power.  I'm also trying to use this app to learn Backbone and D3.js.
+
 Phase 1 - boat balancing
 
 * learn javascript MVC
