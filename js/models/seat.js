@@ -5,7 +5,9 @@ var app = app || {};
   'use strict';
 
   app.Seat = Backbone.Model.extend({
-    
+    defaults: {
+      person: ""
+    }
   });
 
 })();

@@ -7,20 +7,28 @@ var app = app || {};
   app.PersonView = Backbone.View.extend({
     tagName: "li",
     template: _.template($('#person-template').html()),
-
     events: {
       "click a.destroy" : "clear",
       "dblclick"  : "edit",
       "click a.update" : "close",
-      "keypress .edit"  : "updateOnEnter"
+      "keypress .edit"  : "updateOnEnter",
+      "dragstart" : "dragstart",
     },
     initialize: function() {
       this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'destroy', this.remove);
     },
     render: function() {
-      this.$el.html(this.template(this.model.toJSON()));
+      var data= this.model.toJSON();
+      if (data.seat) {
+        data.seatName = data.seat.get('identifier');
+      }
+      else{
+        data.seatName = '(unassigned)';
+      }
+      this.$el.html(this.template(data));
       this.$name = this.$('input.name'); //this is here because its 
+
       return this;
     },
     clear: function() {
@@ -57,5 +65,13 @@ var app = app || {};
     updateOnEnter: function(e) {
       if (e.keyCode == 13) this.close();
     },
+    dragstart: function(e) {
+      console.log('dragstart');
+      //console.log($(this).html());
+      var f = e.originalEvent;
+      f.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
+      f.dataTransfer.setData('Text', this.$el.find(".name").val()); // required otherwise doesn't work
+
+    }
   });
 })(jQuery);

@@ -65,8 +65,6 @@ $(function () {
       this.render();
       //var view = new PersonView({model: person});
       //this.$("#peopleList").appe;nd(view.render().el);
-
-      bindperson();
     },
 
     addAll: function() {

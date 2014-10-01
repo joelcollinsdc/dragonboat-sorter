@@ -106,34 +106,11 @@
     <script type="text/javascript" src="assets/backbone.js"></script>
 
     <script>
-      function bindperson() {
-        $('.person').bind('dragstart', function(e) {
-          console.log('dragstart');
-          console.log($(this).html());
-          var f = e.originalEvent;
-          f.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
-          f.dataTransfer.setData('Text', $(this).find(".name").val()); // required otherwise doesn't work
-        });
-      }
-      $('.row>div').bind('dragover', function (e) {
-        if (e.preventDefault) e.preventDefault(); // allows us to drop
-        $(this).addClass('over');
-        //e.dataTransfer.dropEffect = 'copy';
-        return false;
-      })
-      .bind('dragleave', function (e) {
-        if (e.preventDefault) e.preventDefault(); // allows us to drop
-        $(this).removeClass('over');
-       
-        return false;
-      })
-      .bind('drop', function (e) {
-        console.log(e);
-        console.log(e.originalEvent.dataTransfer)
-        console.log(e.originalEvent.dataTransfer.getData('Text'));
-        $(this).html(e.originalEvent.dataTransfer.getData('Text'));
-        $(this).removeClass('over');
+
+      $(function () {
+
       });
+
     </script>
 
     <!-- templates -->
@@ -141,6 +118,8 @@
       <div class="person" draggable="true">
         <div class="view">
             <%- name %> : <%- weight %> : <%- side_pref %>
+
+            <%- seatName %>
           <a class="destroy">X</a>
         </div>
         <div class="edit">
@@ -158,6 +137,8 @@
 
     <script type="text/template" id="seat-template">
         <%- row %> <%- side %>
+
+        <%- personName %>
     </script>
 
     <script type="text/javascript" src="js/models/person.js"></script>

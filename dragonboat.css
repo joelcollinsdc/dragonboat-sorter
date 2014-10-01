@@ -37,3 +37,16 @@ float:left;
 .editing .edit {
   display:inherit;
 }
+
+.editing .view {
+  display:none;
+}
+
+*[draggable=true] {
+  -moz-user-select:none;
+  -khtml-user-drag: element;
+  cursor: move;
+  border: 2px dashed grey;
+}
+
+.over { background-color:green;}

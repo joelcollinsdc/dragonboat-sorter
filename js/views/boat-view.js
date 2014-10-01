@@ -8,7 +8,7 @@ $(function () {
 
     render: function() {
       app.boat.each(function (seat) {
-        console.log('rendering' + seat);
+        //console.log('rendering' + seat);
         var row = this.$("#boat").find(".row").eq(seat.get("row") -1);
         var seatEl;
         if (seat.get("side") == "left") {
