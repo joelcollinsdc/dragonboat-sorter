@@ -12,10 +12,10 @@ $(function () {
         var row = this.$("#boat").find(".row").eq(seat.get("row") -1);
         var seatEl;
         if (seat.get("side") == "left") {
-          seatEl = row.find("div").eq(0);
+          seatEl = row.find("div.seat").eq(0);
         }
         else {
-          seatEl = row.find("div").eq(1);
+          seatEl = row.find("div.seat").eq(1);
         }
         
         var sv = new app.SeatView({model: seat, el: seatEl});

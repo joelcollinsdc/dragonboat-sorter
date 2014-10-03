@@ -10,12 +10,16 @@ float:left;
   display: table;
   clear: both;
 }
-.row div {
+.row>div {
   width:50%;
   float:left;
   box-sizing: border-box; ;
   height: 50px; 
   border: 1px solid grey; 
+}
+
+.row div.seated {
+  background-color:lightblue;
 }
 
 .selected {

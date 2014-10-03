@@ -12,14 +12,18 @@ var app = app || {};
       var data = this.model.toJSON();
       if (data.person) {
         data.personName = data.person.get("name");
+        data.draggable = true;
       }
       else {
         data.personName = '(empty)';
+        data.draggable = false;
       }
+
       
       return this.$el.html(this.template(data));
     },
     events: {
+      "dragstart" : "dragstart",
       "drop" : "drop",
       "dragover" : "dragover",
       "dragleave" : "dragleave",
@@ -28,10 +32,17 @@ var app = app || {};
       this.listenTo(this.model, 'change', this.render);
       //this.listenTo(this.model, 'destroy', this.remove);
     },
+    dragstart: function (e) {
+      console.log('dragstart seat');
+      //console.log($(this).html());
+      var f = e.originalEvent;
+      f.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
+      f.dataTransfer.setData('Text', this.$el.find(".name").val()); // required otherwise doesn't work
+    },
     drop: function (e) {
-      
       this.$el.html(e.originalEvent.dataTransfer.getData('Text'));
       this.$el.removeClass('over');
+      this.$el.addClass('seated');
       
       //get the model of the person (?necessary)
       var person = app.people.first();

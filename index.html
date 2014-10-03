@@ -33,44 +33,44 @@
     <div id="boat">
       <div id="drummer"></div>
       <div class="row">
-        <div></div>
-        <div></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
       <div class="row">
-        <div></div>
-        <div></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
       <div class="row">
-        <div></div>
-        <div></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
       <div class="row">
-        <div></div>
-        <div></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
       <div class="row">
-        <div></div>
-        <div></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
       <div class="row">
-        <div></div>
-        <div></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
       <div class="row">
-        <div></div>
-        <div></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
       <div class="row">
-        <div></div>
-        <div></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
       <div class="row">
-        <div></div>
-        <div></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
       <div class="row">
-        <div></div>
-        <div></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
       <div id="steerer"></div>
     </div>
@@ -136,9 +136,11 @@
     </script>
 
     <script type="text/template" id="seat-template">
-        <%- row %> <%- side %>
+      <div draggable="true">
+      <%- row %> <%- side %>
 
-        <%- personName %>
+      <%- personName %>
+      </div>
     </script>
 
     <script type="text/javascript" src="js/models/person.js"></script>
