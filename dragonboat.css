@@ -1,3 +1,11 @@
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
 .hidden{
   display:none;
 }
@@ -9,13 +17,30 @@
 .dropPersonSpacer {
   width:300px;
   height:50px;
+  border: 3px solid white;
 }
 .dropPersonSpace:after {clear:both;}
 
 #boat {
 float:left;
  width:200px;
- background-color: red
+
+}
+#peopleApp {
+  float: left;
+}
+#peopleList {
+  list-style: none;
+}
+.person {
+  display: inline-block;
+  padding: 1em;
+  margin: 0 0 1em;
+}
+
+
+#weights {
+  float: left;
 }
 
 .row { border: 1px solid black;}
@@ -24,7 +49,7 @@ float:left;
   display: table;
   clear: both;
 }
-.row>div {
+.row>div.seat {
   width:50%;
   float:left;
   box-sizing: border-box; ;
@@ -32,7 +57,7 @@ float:left;
   border: 1px solid grey; 
 }
 
-.row div.seated {
+.row div.seat .seated {
   background-color:lightblue;
 }
 

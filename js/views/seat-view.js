@@ -10,9 +10,11 @@ var app = app || {};
     render: function() {
       //add in person data if we have it
       var data = this.model.toJSON();
+      data.classname='';
       if (data.person) {
         data.personName = data.person.get("name");
         data.draggable = true;
+        data.classname = 'seated';
       }
       else {
         data.personName = '(empty)';
@@ -31,13 +33,18 @@ var app = app || {};
     },
     initialize: function() {
       this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'change', this.updateweights)
       //this.listenTo(this.model, 'destroy', this.remove);
+    },
+    updateweights: function(e) {
+      console.log('in updateweights');
+      app.boat.updateWeight();
     },
     dragstart: function (e) {
       console.log('dragstart seat');
 
-      $(".dropPerson").removeClass('hidden');
-      $(".dropPersonSpacer").addClass('hidden');
+      //$(".dropPerson").removeClass('hidden');
+      //$(".dropPersonSpacer").addClass('hidden');
       //console.log($(this).html());
       var f = e.originalEvent;
       f.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
@@ -86,6 +93,8 @@ var app = app || {};
         app.elementDragged.model.set({ person: null });
         app.elementDragged = null;
       }
+
+
     },
     dragover: function (ev) {
       console.log("over...");

@@ -21,6 +21,7 @@ $(function () {
         var sv = new app.SeatView({model: seat, el: seatEl});
         sv.render();
       });
+      
     },
   });
 

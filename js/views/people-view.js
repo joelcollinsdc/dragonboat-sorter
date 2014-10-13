@@ -3,25 +3,28 @@ var app = app || {};
 
 $(function () {
 
-  $(".dropPerson").on('dragover', function(e) {
+  $('html').on('dragover', function(e) {
     console.log("drop person over");
-    $(this).addClass('over');
+    //$(this).addClass('over');
     var e = e.originalEvent;
     if (e.preventDefault) e.preventDefault(); // allows us to drop
     //this.className = 'over';
     e.dataTransfer.dropEffect = 'copy';
     return false;
   });
-  $(".dropPerson").on('drop', function(e) {
+  $('html').on('drop', function(e) {
     console.log('in drop');
-    console.log(app.modelDragged);
-    console.log(app.modelDragged.cid);
+    //console.log(app.modelDragged);
+    //console.log(app.modelDragged.cid);
     // the model dragged is the seat!
-    app.modelDragged.get('person').set({ seat: null});
-    app.modelDragged.set('person', null);
+    if (app.modelDragged.get('person')) {
+      app.modelDragged.get('person').set({ seat: null});
+      app.modelDragged.set('person', null);
+    }
+    
     $(".dropPerson").addClass('hidden');
     $(".dropPersonSpacer").removeClass('hidden');
-    
+
     app.pv.render();
   });
 

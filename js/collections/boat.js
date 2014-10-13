@@ -8,7 +8,25 @@ var app = app || {};
 
 
   app.SeatList = Backbone.Collection.extend({
-    model: app.Seat
+    model: app.Seat,
+
+    updateWeight: function() {
+      console.log('in updateWeight');
+      var leftWeight=0, rightWeight = 0;
+      for (var i=0;i < this.length; i++) {
+        if (this.models[i].get('person')) {
+          if (this.models[i].get('side') == 'left') {
+            leftWeight += this.models[i].get('person').get('weight');
+          }
+          else {
+            rightWeight += this.models[i].get('person').get('weight');
+          }
+        }
+      }
+      $('.leftWeight').html(leftWeight);
+      $('.rightWeight').html(rightWeight);
+      $('.totalWeight').html(leftWeight + rightWeight);
+    }
   });
 
   app.boat = new app.SeatList();
