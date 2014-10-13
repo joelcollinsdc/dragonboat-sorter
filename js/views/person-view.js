@@ -4,6 +4,8 @@ var app = app || {};
 (function ($) {
   'use strict';
 
+
+
   app.PersonView = Backbone.View.extend({
     tagName: "li",
     template: _.template($('#person-template').html()),
@@ -70,8 +72,7 @@ var app = app || {};
       //console.log($(this).html());
       var f = e.originalEvent;
       f.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
-      f.dataTransfer.setData('Text', this.$el.find(".name").val()); // required otherwise doesn't work
-
+      app.modelDragged = this.model;
     }
   });
 })(jQuery);

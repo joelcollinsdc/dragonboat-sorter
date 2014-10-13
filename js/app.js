@@ -8,7 +8,8 @@ $(function () {
   'use strict';
 
   // kick things off by creating the `App`
-  new app.PeopleView();
+  app.pv = new app.PeopleView();
+  app.pv.render();
   var bv = new app.BoatView();
   bv.render();
 });

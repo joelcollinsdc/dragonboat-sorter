@@ -14,4 +14,6 @@ var app = app || {};
   });
 
   app.people = new app.PeopleList();
+
+  app.people.add({ name: 'Joel'});
 })();

@@ -1,0 +1,20 @@
+#dnd-names { list-style: none; }
+  #dnd-names li { 
+    display: inline-block;
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid;
+  }
+
+*[draggable=true] {
+  cursor: move;
+}
+
+#seats { list-style: none; padding: 1em 0; }
+
+  #seats li { 
+    display: inline-block;
+    border: 2px dashed;
+    padding: 2em;
+    margin: 1em;
+  }

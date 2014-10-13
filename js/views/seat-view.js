@@ -16,7 +16,7 @@ var app = app || {};
       }
       else {
         data.personName = '(empty)';
-        data.draggable = false;
+        data.draggable = '';
       }
 
       
@@ -27,6 +27,7 @@ var app = app || {};
       "drop" : "drop",
       "dragover" : "dragover",
       "dragleave" : "dragleave",
+      "dragend" : "dragend",
     },
     initialize: function() {
       this.listenTo(this.model, 'change', this.render);
@@ -34,21 +35,57 @@ var app = app || {};
     },
     dragstart: function (e) {
       console.log('dragstart seat');
+
+      $(".dropPerson").removeClass('hidden');
+      $(".dropPersonSpacer").addClass('hidden');
       //console.log($(this).html());
       var f = e.originalEvent;
       f.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
       f.dataTransfer.setData('Text', this.$el.find(".name").val()); // required otherwise doesn't work
+      app.modelDragged = this.model;
+
+    },
+    dragend: function (e) {
+
+      console.log("in drag end");
+      app.modelDragged = null;
+      $(".dropPerson").addClass('hidden');
+      $(".dropPersonSpacer").removeClass('hidden');
     },
     drop: function (e) {
-      this.$el.html(e.originalEvent.dataTransfer.getData('Text'));
+      // drop could be a personview or seatview
+
+      //this.$el.html(e.originalEvent.dataTransfer.getData('Text'));
       this.$el.removeClass('over');
-      this.$el.addClass('seated');
+
+      if (this.model.get("person")) {
+        this.model.get("person").set("seat", null);
+      }
+      this.model.set("person", null);
+
+      var person=null;
+      if (app.modelDragged instanceof app.Seat) {
+        person = app.modelDragged.get("person");
+      }
+      else {
+        person = app.modelDragged;
+      }
+
+      this.model.set({ person: person})
+      app.modelDragged.set({person: null});
       
-      //get the model of the person (?necessary)
-      var person = app.people.first();
+      
       //update the model with the person
-      this.model.set({ person : person });
+      //this.model.set({ person : person });
       person.set({ seat: this.model });
+
+      app.pv.render();
+
+
+      if (app.elementDragged) {
+        app.elementDragged.model.set({ person: null });
+        app.elementDragged = null;
+      }
     },
     dragover: function (ev) {
       console.log("over...");

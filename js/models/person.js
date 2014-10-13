@@ -8,7 +8,7 @@ var app = app || {};
     defaults: {
       name: '',
       weight: 150,
-      side: 'both'
+      side_pref: 'Both'
     },
     
   });

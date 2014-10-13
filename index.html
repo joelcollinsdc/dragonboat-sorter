@@ -11,6 +11,9 @@
 
     <div id="peopleApp">
       <h2>Available People:</h2>
+
+      <div class="dropPersonSpacer"></div>
+      <div class="dropPerson hidden">Drop Here</div>
       <ul id="peopleList">
       </ul>
       <fieldset>
@@ -31,7 +34,7 @@
 
 
     <div id="boat">
-      <div id="drummer"></div>
+      <div id="drummer">Drummer</div>
       <div class="row">
         <div class="seat"></div>
         <div class="seat"></div>
@@ -72,7 +75,7 @@
         <div class="seat"></div>
         <div class="seat"></div>
       </div>
-      <div id="steerer"></div>
+      <div id="steerer">Steerer</div>
     </div>
     <div id="editor">
       <h2>Editor:</h2>
@@ -136,12 +139,13 @@
     </script>
 
     <script type="text/template" id="seat-template">
-      <div draggable="true">
+      <div draggable="<%- draggable %>">
       <%- row %> <%- side %>
 
       <%- personName %>
       </div>
     </script>
+
 
     <script type="text/javascript" src="js/models/person.js"></script>
     <script type="text/javascript" src="js/models/seat.js"></script>
