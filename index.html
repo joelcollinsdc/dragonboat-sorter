@@ -1,95 +1,124 @@
 <html>
   <head>
     <title>Dragonboat sorting app</title>  
+    <link type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"  rel="stylesheet"/>
     <link type="text/css" href="dragonboat.css" rel="stylesheet" />
 
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <h1>Dragonboat Sorter</h1>
-
-
-
-
-
-
-    <div id="boat" class="clearfix">
-      <div id="drummer">Drummer</div>
-      <div class="row">
-        <div class="label">1</div>
-        <div class="seat"></div>
-        <div class="seat"></div>
+    <div class="navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Dragonboat Sorter</a>
+        </div>
       </div>
-      <div class="row">
-        <div class="label">2</div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
-        <div class="label">3</div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div id="steerer">Steerer</div>
     </div>
+    <div class="container">
+      <div class="row">
+        <h1>Dragonboat Sorter</h1>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div id="peopleApp">
+            <h2>Paddlers</h2>
 
-    <div id="boatStats">
-      Total Weight: <span class="totalWeight"></span><br />
-      Left: <span class="leftWeight"></span>
-      Right: <span class="rightWeight"></span>
+            <fieldset>
+              <legend>Add new person</legend>
+              <label for="newPerson">Add:</label>
+              <input name="new_person" id="new_person" type="text" placeholder="Name:" />
+              <label for="weight">Weight:</label>
+              <input name="new_weight" id="new_weight" type="text" placeholder="Weight:" />
+              <label for="side">Side Preference:</label>
+              <select name="new_side_pref" id="new_side_pref">
+                <option>Left</option>
+                <option selected>Both</option>
+                <option>Right</option>
+              </select>
+            </fieldset>
+            <!--<div class="dropPersonSpacer"></div>
+            <div class="dropPerson hidden">Drop Here</div>-->
+            <ul id="peopleList">
+            </ul>
+            
+          </div>
+        </div>
+
+        <div class="col-md-4">
+
+          <div id="boat" class="clearfix">
+
+            <div id="drummer">Drummer</div>
+            <div class="row">
+              <div class="label">1</div>
+              <div class="seat"></div>
+              <div class="seat"></div>
+            </div>
+            <div class="row">
+              <div class="label">2</div>
+              <div class="seat"></div>
+              <div class="seat"></div>
+            </div>
+            <div class="row">
+              <div class="label">3</div>
+              <div class="seat"></div>
+              <div class="seat"></div>
+            </div>
+            <div class="row">
+              <div class="seat"></div>
+              <div class="seat"></div>
+            </div>
+            <div class="row">
+              <div class="seat"></div>
+              <div class="seat"></div>
+            </div>
+            <div class="row">
+              <div class="seat"></div>
+              <div class="seat"></div>
+            </div>
+            <div class="row">
+              <div class="seat"></div>
+              <div class="seat"></div>
+            </div>
+            <div class="row">
+              <div class="seat"></div>
+              <div class="seat"></div>
+            </div>
+            <div class="row">
+              <div class="seat"></div>
+              <div class="seat"></div>
+            </div>
+            <div class="row">
+              <div class="seat"></div>
+              <div class="seat"></div>
+            </div>
+            <div id="steerer">Steerer</div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div id="boatStats">
+            <h2>Stats</h2>
+            Total Weight: <span class="totalWeight"></span><br />
+            Left: <span class="leftWeight"></span>
+            Right: <span class="rightWeight"></span>
+          </div>
+        </div>
+      </div>
     </div>
+    
 
 
-    <div id="peopleApp">
-      <h2>Unassigned Paddlers:</h2>
 
-      <fieldset>
-        <legend>Add new person</legend>
-        <label for="newPerson">Add:</label>
-        <input name="new_person" id="new_person" type="text" placeholder="Name:" />
-        <label for="weight">Weight:</label>
-        <input name="new_weight" id="new_weight" type="text" placeholder="Weight:" />
-        <label for="side">Side Preference:</label>
-        <select name="new_side_pref" id="new_side_pref">
-          <option>Left</option>
-          <option selected>Both</option>
-          <option>Right</option>
-        </select>
-      </fieldset>
-      <!--<div class="dropPersonSpacer"></div>
-      <div class="dropPerson hidden">Drop Here</div>-->
-      <ul id="peopleList">
-      </ul>
-      
-    </div>
+
+
+
+
+
+
+
+
+    
    <!-- <div id="editor">
       <h2>Editor:</h2>
       <form>
@@ -107,8 +136,9 @@
     <script src="assets/jquery.js"></script>
    
 
-    <script type="text/javascript" src="assets/underscore.js"></script>
-    <script type="text/javascript" src="assets/backbone.js"></script>
+    <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
+    <script type="text/javascript" src="bower_components/backbone/backbone.js"></script>
+    <script type="text/javascript" src="bower_components/backbone.localStorage/backbone.localStorage.js"></script>
 
     <script>
 
@@ -148,6 +178,7 @@
       </div>
     </script>
 
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="js/models/person.js"></script>
     <script type="text/javascript" src="js/models/seat.js"></script>

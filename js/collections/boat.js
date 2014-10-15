@@ -10,16 +10,19 @@ var app = app || {};
   app.SeatList = Backbone.Collection.extend({
     model: app.Seat,
 
+    localStorage: new Backbone.LocalStorage("SeatList"), // Unique name within your app.
+
+
     updateWeight: function() {
       console.log('in updateWeight');
       var leftWeight=0, rightWeight = 0;
       for (var i=0;i < this.length; i++) {
         if (this.models[i].get('person')) {
           if (this.models[i].get('side') == 'left') {
-            leftWeight += this.models[i].get('person').get('weight');
+            leftWeight += parseInt(this.models[i].get('person').get('weight'));
           }
           else {
-            rightWeight += this.models[i].get('person').get('weight');
+            rightWeight += parseInt(this.models[i].get('person').get('weight'));
           }
         }
       }

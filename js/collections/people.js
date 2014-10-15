@@ -6,6 +6,7 @@ var app = app || {};
 
   app.PeopleList = Backbone.Collection.extend({
     model: app.Person,
+    localStorage: new Backbone.LocalStorage("PeopleList"), // Unique name within your app.
 
     //allow automatic sorting by name ignoring case
     comparator: function(person) {
@@ -14,7 +15,5 @@ var app = app || {};
   });
 
   app.people = new app.PeopleList();
-
-  app.people.add({ name: 'Joel'});
-  app.people.add({ name: 'Natasha'});
+  app.people.fetch();
 })();

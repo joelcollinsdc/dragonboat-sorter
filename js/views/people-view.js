@@ -69,7 +69,8 @@ $(function () {
       if (e.keyCode != ENTER_KEY) return;
       if (!this.$new_name.val()) return;
 
-      app.people.add(this.new_attributes());
+      
+      app.people.create(this.new_attributes());
 
       this.clear_new_fields();
     },

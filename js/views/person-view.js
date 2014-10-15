@@ -43,6 +43,7 @@ var app = app || {};
     },
 
     close: function() {
+      console.log('in close');
       if (!this.$el.hasClass('editing')) {
         return;
       }
@@ -51,7 +52,8 @@ var app = app || {};
         side_pref = this.$('.side_pref').val();
 
       if (name) {
-        this.model.set({
+        console.log('saving ' + name);
+        this.model.save({
           name: name, 
           weight: weight,
           side_pref: side_pref

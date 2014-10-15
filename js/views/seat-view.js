@@ -70,6 +70,7 @@ var app = app || {};
       }
       this.model.set("person", null);
 
+
       var person=null;
       if (app.modelDragged instanceof app.Seat) {
         person = app.modelDragged.get("person");
@@ -80,12 +81,15 @@ var app = app || {};
 
       this.model.set({ person: person})
       app.modelDragged.set({person: null});
-      
+
+      this.model.save();
+      app.modelDragged.save();
       
       //update the model with the person
       //this.model.set({ person : person });
       person.set({ seat: this.model });
-
+      person.save();
+      
       app.pv.render();
 
 
